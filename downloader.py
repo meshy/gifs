@@ -1,6 +1,6 @@
 import os
 from urllib.error import HTTPError, URLError
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 
 COL_CLEAR = '\033[0m'
@@ -45,7 +45,7 @@ with open(INPUT_FILENAME) as input_file:
             continue
 
         try:
-            img = urlopen(url)
+            img = urlopen(Request(url, headers={'User-Agent': 'Mozilla'}))
         except (HTTPError, URLError) as e:
             error(url, filename, str(e))
             continue
